@@ -1,19 +1,18 @@
-import React, { useState } from 'react'
-import './style.css'
+import React from 'react'
+import { useState } from 'react'
+import { auth } from './firebase'
 import { Link } from 'react-router-dom'
-import {auth} from './firebase'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
-
-const SignUpForm = () => {
+const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
-            await createUserWithEmailAndPassword(auth,email,password)
-            console.log('Account Created');
+            await signInWithEmailAndPassword(auth,email,password)
+            console.log('Login Success');
         }
         catch(err){
             console.log();
@@ -22,7 +21,7 @@ const SignUpForm = () => {
   return (
    <div className="signup-container">
     <form action="" className="signup-form" onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
+        <h1>Login</h1>
         <label htmlFor="email">
             Email:
             <input type="text" onChange={(e)=> setEmail(e.target.value)}/>
@@ -31,13 +30,13 @@ const SignUpForm = () => {
             Password:
             <input type="password" onChange={(e)=>setPassword(e.target.value)}/>
         </label>
-        <button type='submit'>Sign Up</button><br />
-        <p>Already Registered?
-            <Link to='/login'>Login</Link>
+        <button type='submit'>Login</button><br />
+        <p>Don't have account?
+            <Link to='/signup'>Register</Link>
         </p>
     </form>
    </div>
   )
 }
 
-export default SignUpForm
+export default Login
