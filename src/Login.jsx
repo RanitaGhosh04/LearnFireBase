@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { auth } from './firebase'
 import { Link } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -13,9 +15,11 @@ const Login = () => {
         try{
             await signInWithEmailAndPassword(auth,email,password)
             console.log('Login Success');
+            toast.success('Login Successful')
         }
         catch(err){
             console.log();
+            toast.error('Failed to Login. Try again')
         }
     }
   return (
@@ -35,6 +39,7 @@ const Login = () => {
             <Link to='/signup'>Register</Link>
         </p>
     </form>
+    <ToastContainer /> 
    </div>
   )
 }

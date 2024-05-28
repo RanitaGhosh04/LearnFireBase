@@ -3,6 +3,8 @@ import './style.css'
 import { Link } from 'react-router-dom'
 import {auth} from './firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 
 const SignUpForm = () => {
@@ -14,9 +16,11 @@ const SignUpForm = () => {
         try{
             await createUserWithEmailAndPassword(auth,email,password)
             console.log('Account Created');
+            toast.success('Account created successfully!')
         }
         catch(err){
             console.log();
+            toast.error('Failed to create account. Please try again.')
         }
     }
   return (
@@ -36,6 +40,7 @@ const SignUpForm = () => {
             <Link to='/login'>Login</Link>
         </p>
     </form>
+    <ToastContainer /> 
    </div>
   )
 }

@@ -48,4 +48,13 @@
 
 .signup-form button:hover{
     background-color: #27ae60;
+    color: white;
+}
+
+.signup-form{
+    color: white;
+}
+
+.signup-form a{
+    color: white;
 }
